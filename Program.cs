@@ -1,6 +1,7 @@
-var root = HtmlParser.Parse(await HtmlParser.Load("https://pypi.org"));
-var all = root.Descendants().ToList();
-Console.WriteLine($"Descendants: {all.Count}");
-var deepest = all.MaxBy(e => e.Ancestors().Count())!;
-Console.WriteLine($"Deepest: {deepest}");
-Console.WriteLine("Ancestors: " + string.Join(" <- ", deepest.Ancestors()));
+foreach (var query in new[] { "div", "#main", ".big", "div#main.big.red", "div .x span" })
+{
+    var parts = new List<string>();
+    for (var s = Selector.Parse(query); s != null; s = s.Child)
+        parts.Add($"[Tag={s.TagName}, Id={s.Id}, Classes={string.Join(",", s.Classes)}, Parent={(s.Parent == null ? "-" : "yes")}]");
+    Console.WriteLine($"{query,-18} => {string.Join(" -> ", parts)}");
+}
