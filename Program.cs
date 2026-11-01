@@ -1,2 +1,2 @@
-var html = await HtmlParser.Load("https://pypi.org");
-Console.WriteLine(html[..500]);
+Console.WriteLine($"Tags: {HtmlHelper.Instance.Tags.Length}, VoidTags: {string.Join(", ", HtmlHelper.Instance.VoidTags)}");
+Console.WriteLine($"Same instance: {ReferenceEquals(HtmlHelper.Instance, HtmlHelper.Instance)}");
