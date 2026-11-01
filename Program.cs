@@ -1,6 +1,5 @@
 var root = HtmlParser.Parse(await HtmlParser.Load("https://pypi.org"));
-foreach (var query in new[] { "div", "#content", ".dropdown__link", "div.site-menu", "div span", "footer a", "div div" })
-{
-    var found = root.FindElements(Selector.Parse(query));
-    Console.WriteLine($"{query,-16} {found.Count,4}  {string.Join("  ", found.Take(3))}");
-}
+string[] queries = ["div", "a", "li", "#content", "#search", ".dropdown__link", ".sr-only", "div.site-menu", "form#search-form.search-form",
+                    "nav.horizontal-menu", "div span", "footer a", "div div", "ul li a", "header .site-container", "main .container p"];
+foreach (var query in queries)
+    Console.WriteLine($"{query} = {root.FindElements(Selector.Parse(query)).Count}");
