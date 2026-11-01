@@ -1,2 +1,3 @@
-Console.WriteLine($"Tags: {HtmlHelper.Instance.Tags.Length}, VoidTags: {string.Join(", ", HtmlHelper.Instance.VoidTags)}");
-Console.WriteLine($"Same instance: {ReferenceEquals(HtmlHelper.Instance, HtmlHelper.Instance)}");
+var parts = HtmlParser.Split(await HtmlParser.Load("https://pypi.org"));
+Console.WriteLine($"Count: {parts.Count}");
+parts.Take(25).ToList().ForEach(Console.WriteLine);
