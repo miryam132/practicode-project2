@@ -1,2 +1,2 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+var html = await HtmlParser.Load("https://pypi.org");
+Console.WriteLine(html[..500]);
