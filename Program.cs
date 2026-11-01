@@ -1,8 +1,6 @@
 var root = HtmlParser.Parse(await HtmlParser.Load("https://pypi.org"));
-Print(root, 0);
-
-void Print(HtmlElement element, int depth)
-{
-    Console.WriteLine(new string(' ', depth * 2) + element + (element.InnerHtml == "" ? "" : $"  \"{element.InnerHtml}\""));
-    element.Children.ForEach(c => Print(c, depth + 1));
-}
+var all = root.Descendants().ToList();
+Console.WriteLine($"Descendants: {all.Count}");
+var deepest = all.MaxBy(e => e.Ancestors().Count())!;
+Console.WriteLine($"Deepest: {deepest}");
+Console.WriteLine("Ancestors: " + string.Join(" <- ", deepest.Ancestors()));
